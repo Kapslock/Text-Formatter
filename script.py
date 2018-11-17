@@ -86,7 +86,7 @@ class TextFormatter(object):
             print '-'.rjust(start_index) + line1.lstrip('.')
         else:
             print '+'.rjust(start_index) + line1.lstrip('.')
-            start_index = start_index + 2
+            start_index = start_index + 1
 
         return start_index
 
