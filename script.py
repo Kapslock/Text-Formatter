@@ -17,7 +17,7 @@ class TextFormatter(object):
                 input_data : list of lines
         """
         input_data = sys.stdin.readlines()
-        input_data = [x for x in input_data if x != '\n']
+        input_data = [x.rstrip('\n') for x in input_data if x != '\n']
         return input_data
 
     def star_parser(self, index_list, line):
@@ -44,6 +44,7 @@ class TextFormatter(object):
         elif index_count == 1:
             index_list[0] += 1
             index_list = index_list[:1]
+
         else:
             index_list = index_list[:index_count]
             index_list[-1] += 1
@@ -68,23 +69,23 @@ class TextFormatter(object):
                                     be written
         """
         if text[index].startswith('*'):
-            print '-'.rjust(start_index), line1.lstrip('.')
+            print '-'.rjust(start_index) + line1.lstrip('.')
             return start_index
         line1_index_count = len(line1) - len(line1.lstrip('.'))
         j = index
         while not text[j].startswith('.'):
             if j == len(text) - 1:
-                print '-'.rjust(start_index), line1.lstrip('.')
-                print '-'.rjust(start_index - 1), text[j]
+                print '-'.rjust(start_index) + line1.lstrip('.')
+                print '-'.rjust(start_index - 1) + text[j]
                 exit(0)
             j += 1
         line2_index_count = len(text[j]) - len(text[j].lstrip('.'))
 
         if line1_index_count >= line2_index_count:
 
-            print '-'.rjust(start_index), line1.lstrip('.')
+            print '-'.rjust(start_index) + line1.lstrip('.')
         else:
-            print '+'.rjust(start_index), line1.lstrip('.')
+            print '+'.rjust(start_index) + line1.lstrip('.')
             start_index = start_index + 2
 
         return start_index
@@ -108,15 +109,15 @@ class TextFormatter(object):
             elif line1.startswith('.'):
                 start_index = self.dot_parser(start_index, line1, text, i)
             else:
-                print "".rjust(start_index - 1), line1
+                print "".rjust(start_index - 1) + line1
             line1 = text[i]
         # Parse the last line
         if text[-1].startswith('*'):
             self.star_parser(index_list, text[-1])
         elif text[-1].startswith('.'):
-            print '-'.rjust(start_index), text[-1].lstrip('.')
+            print '-'.rjust(start_index) + text[-1].lstrip('.')
         else:
-            print "".rjust(start_index - 1), text[-1]
+            print "".rjust(start_index - 1) + text[-1]
 
 
 if __name__ == "__main__":
