@@ -49,10 +49,9 @@ class TextFormatter(object):
             index_list = index_list[:index_count]
             index_list[-1] += 1
         out_str = ".".join([str(b) for b in index_list])
-        start_index = len(out_str) + 2
         out_str = out_str + line.lstrip('*')
         print out_str
-        return start_index
+        return index_list, 3
 
     def dot_parser(self, start_index, line1, text, index):
         """
@@ -69,20 +68,20 @@ class TextFormatter(object):
                                     be written
         """
         if text[index].startswith('*'):
+            # if start_index > 5: start_index = 3
             print '-'.rjust(start_index) + line1.lstrip('.')
             return start_index
         line1_index_count = len(line1) - len(line1.lstrip('.'))
         j = index
         while not text[j].startswith('.'):
             if j == len(text) - 1:
-                print '-'.rjust(start_index) + line1.lstrip('.')
-                print '-'.rjust(start_index - 1) + text[j]
+                print '-'.rjust(start_index), line1.lstrip('.')
+                print '-'.rjust(start_index - 1), text[j]
                 exit(0)
             j += 1
         line2_index_count = len(text[j]) - len(text[j].lstrip('.'))
 
         if line1_index_count >= line2_index_count:
-
             print '-'.rjust(start_index) + line1.lstrip('.')
         else:
             print '+'.rjust(start_index) + line1.lstrip('.')
@@ -105,11 +104,11 @@ class TextFormatter(object):
         for i in range(1, len(text)):
 
             if line1.startswith('*'):
-                start_index = self.star_parser(index_list, line1)
+                index_list, start_index = self.star_parser(index_list, line1)
             elif line1.startswith('.'):
                 start_index = self.dot_parser(start_index, line1, text, i)
             else:
-                print "".rjust(start_index - 1) + line1
+                print "".rjust(start_index) + line1
             line1 = text[i]
         # Parse the last line
         if text[-1].startswith('*'):
@@ -117,7 +116,7 @@ class TextFormatter(object):
         elif text[-1].startswith('.'):
             print '-'.rjust(start_index) + text[-1].lstrip('.')
         else:
-            print "".rjust(start_index - 1) + text[-1]
+            print "".rjust(start_index) + text[-1]
 
 
 if __name__ == "__main__":

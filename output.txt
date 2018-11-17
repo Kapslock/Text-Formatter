@@ -5,23 +5,23 @@
     - I saw a really bad one back in 2008
 2 This is the second numbered item in the outline
   + This is sub text that spans multiple lines
-   This should be included with the previous line
-   And this line too
+    This should be included with the previous line
+    And this line too
    - That is more sub text
 3 Numbers
   - Some text
 3.1 Lots
-    - Some more text
-    - And some more
+  - Some more text
+  - And some more
 3.1.1 And lots
-      + One
-       + Two
-        - Three
+  + One
+   + Two
+    - Three
 3.1.1.1 Of numbers
-        - Another line
+  - Another line
 3.2 Less Numbers
-    - Text
-3.1.2 More Numbers
-      - Blah
+  - Text
+3.2.1 More Numbers
+  - Blah
 4 One number again
   - The last line
